@@ -1,10 +1,16 @@
 ## QFTP version 0.98 by Peter Strand (Copyright (C) 1998)
 
+This code is part of a project of mine to revive old code,
+just for fun. This project is two decades old, please keep
+that in mind before judging my coding too harshly :)
+
+The email address below is obsolete, current one is: peter@nena.se
+
 ## Build status
 
 [![Travis CI](https://travis-ci.org/apstrand/attic-qftp.svg?branch=master)](https://travis-ci.org/apstrand/attic-qftp)
 
-## Description
+## Ancient description
 
 This program is under development, this means that the most unexpected things
 can happen when you least expect it...  I'm currently doing a total rewrite of
