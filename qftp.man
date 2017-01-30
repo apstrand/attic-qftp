@@ -1,0 +1,344 @@
+.TH QFTP 1
+.SH NAME
+qftp \- file transfer program
+
+.SH SYNOPSIS
+
+.B qftp
+[\fBoptions\fP]
+[\fB\-u user\fP[:\fBpassword]\fP] [\fB\-y retries\fP[:\fBsleep\fP]]
+[\fBhost\fP[:][\fBdir\fP][\fBfile\fP]]
+
+.SH DESCRIPTION
+
+\fBqftp\fP is a ftp program which aims to be small and efficient but still
+powerful and have lots of features. It's still under active development and will 
+improve by time (see the NOTES section below). The interface is somewhat
+similar to other line oriented ftp clients, you type commands and get response
+from the server. But it tries to minimize the neccessary typing and speed up usage. 
+
+
+Some features:
+
+The directory listings from \fBls\fP and \fBdir\fP are cached (they will only be 
+transferred once per session).
+
+Single key shortcuts for all commands.
+
+\fBCD\fP is the default command (ie: you can type a directory name directly at the
+prompt, without c or cd and it will be parsed as \fBcd <dir>\fP).
+
+Background downloading with \fBget -b\fP
+
+The \fBview\fP command can optionally decompress files on the fly.
+
+Automatic retry on login (\fBopen -y 10:5 <host>\fP will retry ten times and
+sleep five seconds between)
+
+You can specify aliases and default username, password and directory in a
+\fB.qftprc\fP file in you homedirectory (see \fBFILES\fP section below)
+
+Marking of files (tagging) for later retrieval in a big chunk.
+
+Automatic anonymous login (\fBopen -a\fP)
+
+The listed files and directories are numbered, and you can use the numbers
+instead of the filename. See the EXAMPLES section for further description.
+
+
+.SS Commands
+
+All commands have an single letter shortcuts, and you need only to type enough letters
+to distinguish between the commands.
+
+ie:
+\fIG\fP, \fIgetm\fP and \fIgetmarked\fP are all the same command, this is for
+saving unneccessary typing. 
+
+There is only one set of options, and each command uses a subset of them, se
+below for a description of the options. You can use the \fBset\fP command to set 
+an option globally (\fBset -b\fP will put all downloads in the background).
+
+
+.TP
+.BR "o " "\- " open " [" options ] "" " [" host ] "" [ "" : "" ] "" [ dir ] "" [ file ]
+
+Opens a connection to \fIhost\fP.
+It can retry a number of times and sleep a specified time between (the \fB\-y\fP
+option). 
+
+It takes login information from the following places: 
+.br
+The \fB\-a\fP option (anonymous login)
+.br
+The \fB\-u\fP option (specified user and password)
+.br
+The .netrc file (except if you provide the \fB\-n\fP switch)
+.br
+and at last, it will ask you. 
+
+It will change to a directory either if you specify one or if it finds the hosts in the .qftprc
+file. If you specify a file will it retrieve it. 
+
+
+
+.TP
+.BR "x " "\- " close
+
+Closes the connection.
+
+.TP
+.BR "l " "\- " ls " [" options ] "" " [" path ]
+
+Lists the files in path, or in the current directory if you omit the path. 
+
+If you provide the \fB-l\fP switch you will get a "long" list, with permission,
+user, group, size, date and name (Like a normal ls -l). It's normally sorted by
+name, \fB\-r\fP reverses it. \fB\-s\fP sorts by size.
+
+
+Each line begins with a number, you can use this number as a shortcut for the
+filename (\fIg\ #42\fP instead of \fIget\ this_is_a_very_long_filename\fP)
+
+If the q (quiet) option is unset will ls wait for <enter> after a screenfull of
+lines, and the short ls will print multiple columns. 
+
+
+The listings are cached. 
+
+.TP
+.BR "d " "\- " dir " [" options ] "" " [" path ]
+
+Like \fBls \-l\fP
+
+.TP
+.BR "c " "\- " cd " [" path ]
+
+Changes remote working directory to \fBpath\fP.
+
+.TP
+.BR "C " "\- " lcd " [" path ]
+
+Changes local working directory to \fBpath\fP.
+
+.TP
+.BR "m " "\- " mark " [" options ] "" " [" path ]
+
+Marks a file or directory for later retrieval. Useful if you're on a slow
+link and don't want to wait for every file before you can continue
+browsing the site.
+
+.TP
+.BR "G " "\- " getmarked " [" options ]
+
+Retrieves the files you have marked. It takes the same options as get.
+
+.TP
+.BR "Q " "\- " quote " [" ftp\-command ]
+
+Sends and arbitrary command to the server and shows the result.
+
+Use \fIquote HELP\fP to get help from the server with the commands.
+
+.TP
+.BR "g " "\- " get " [" options ] "" " [" paths... ]
+
+Retrieves one or more files or directories. 
+
+Available options:
+
+\fB\-b\fP forks(2) and opens a new connection and retrieves the file in the
+background. 
+
+\fB\-e\fP retrieves whole directory structures (it doesn't handle links yet)
+
+\fB\-f\fP forces overwrite of local files.
+
+\fB\-c\fP continues downloading of an existing file (aka reget)
+
+.TP
+.BR "p " "\- " put " [" file ] 
+
+Uploads files to the remote site. Doesn't handle any options yet.
+
+
+.TP
+.BR "h " "\- " help
+
+Shows a summary over available commands and options.
+
+.TP
+.BR "s " "\- " set " [" option " [" argument ] ]
+
+Set an option or shows the values of all options if invoked without option. 
+
+.TP
+.BR "v " "\- " view " [" options ] "" 
+
+Views a file using $PAGER (or "more" if $PAGER is unset). Can optionally
+(\fB\-z\fP option) decompress files on the fly (using gzip, make sure it's in
+your path). 
+
+
+.SS Options
+Most options can be invoked either in lowercase or uppercase. Lowercase to set
+or enable and uppercase to unset or disable. 
+
+
+.B -a
+anonymous login
+
+.B -b
+Background operation
+
+.B -c
+Continuation mode (reget)
+
+.B -e
+Recursive get 
+
+.B -f
+Force overwrite
+
+.B -l
+Long Listings
+
+.B -n
+Don't use username and password from .netrc
+
+.B -q
+Quiet operation
+
+.B -r
+Reverse listings
+
+.B -s 
+Sort by size
+
+.B -t
+Sort by time (doesn't work yet)
+
+
+.B -u 
+Set default user and password, the password is optional and is separated from
+the username with a ":"
+
+.B -y
+Set number of retries and optionally the sleeping time between, separated by a ":"
+
+.B -z
+Decompress files on the fly before viewing.
+
+
+.SH OPTIONS
+
+The command line options are the same as for the different command (see above), they are set
+globally (as if set by the \fIset\fP command).
+
+.SH EXAMPLES
+
+
+.B Invocation examples:
+
+
+Log in anonymously at sunsite and cd to /pub/Linux
+
+qftp\ -a\ sunsite.unc.edu/pub/Linux/
+
+
+Get a kernel, retry 10 times and sleep 60 seconds between.
+
+qftp\ -a\ -y\ 10:60\ ftp.kernel.org:/pub/linux/kernel/v2.1/linux-2.1.104.tar.gz
+
+
+Log in with a username and try 30 times
+
+qftp\ -u\ user\ -y\ 30\ some.host.net
+
+
+Get a whole directory:
+
+qftp -e -a sunsite.unc.edu/pub/Linux/Incoming/
+
+
+.B Command examples
+
+
+foo:/home/bar% get #10 #12-20,45
+.br
+Will get the files with number 10, 12 to 20 and 45 in the previous listing. 
+
+foo:/home/bar% v README.gz
+.br
+Will get README.gz, decompress it with gzip and feed the result into $PAGER.
+
+foo:/home/bar% g -rf tmp #10
+.br
+Gets tmp and file/dir number 10, recurses into subdirectories and forces
+overwrite.
+
+foo:/home/bar% s -u peter
+.br
+Sets default user name to "peter".
+
+foo:/home/bar% ls -ls
+.br
+Long listing sorted by size, smallest first.
+
+
+.SH ENVIRONMENT
+
+
+.B HOME
+
+Used to find the .qftprc file
+
+.B LOGNAME
+
+Used for the password for anonyomus sessions.
+
+.B PAGER
+
+Used with the view command.
+
+
+.SH FILES
+
+\fB~/.qftprc\fP
+.br
+It has the following format:
+
+Lines started with \- are parsed as global options.
+Other lines defines aliases. Username, password and directory are optional.
+
+
+Example:
+
+-c
+.br
+-y 100:10
+.br
+sunsite sunsite.unc.edu ftp     pst@2.sbbs.se   /pub/Linux
+.br
+kernel  ftp.kernel.org  -       -               -
+.br
+home    your.home.net   name    xxxx            -
+
+
+.SH NOTES
+
+This program is under active development, please contact me (Peter Strand, <pst@2.sbbs.se>) if you
+find bugs or have ideas of improvements. Everything which speeds up usage or makes it more
+convenient to use is welcome. 
+
+.SH CAVEATS
+
+As I said before, it is under development and contains probably some bugs. Please report what you
+find. 
+
+
+.SH AUTHOR
+
+Peter Strand
+<pst@2.sbbs.se>
+

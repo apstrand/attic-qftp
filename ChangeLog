@@ -1,0 +1,40 @@
+1998-06-07 15:09  Peter Strand  <peter@fisk.helsingborg.se>
+
+	* txtif.cc (Get): Preserve date
+	* Added config option for preserve date (m)
+
+1998-06-07 13:03  Peter Strand  <peter@fisk.helsingborg.se>
+
+	* txtif.cc (List): Multiple columns
+
+1998-06-07 02:04  Peter Strand  <peter@fisk.helsingborg.se>
+
+	* Added listmarked command
+	* Improved #number parsing
+
+1998-06-07 00:48  Peter Strand  <peter@fisk.helsingborg.se>
+
+	* misc.cc: New file. For general functions.
+
+1998-06-05 00:41  Peter Strand  <peter@fisk.helsingborg.se>
+
+	* conf.cc: No more getopts...
+
+1998-06-03 18:15  Peter Strand  <peter@fisk.helsingborg.se>
+
+	* Replacing maps with vectors to save space, now down under 60k
+	with -O6 -mpentium flags! Will write a minimalistic vector class
+	soon. 
+
+1998-06-01 23:54  Peter Strand  <peter@fisk.helsingborg.se>
+
+	* Have finally written a manual page!
+	* Fixing some problems with option handling 
+
+1998-06-01 18:45  Peter Strand  <peter@fisk.helsingborg.se>
+
+	* Added -Wall switch to gcc, and fixed warnings
+	* Added Hosts class with host info and .qftprc parsing
+	* command line dir & file parsing in TxtIF::Open
+	
+

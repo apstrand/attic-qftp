@@ -1,0 +1,16 @@
+* Caching
+*   ls-lR input
+*   save ls-lR lists
+* Globbing
+* C-c
+* mark / getmarked
+* host&user info (save/load/edit)
+* view (specify filters in .qftprc)
+* quiet/verbose
+* netrc parsing
+* per-host options
+* Write a vector class. 
+*    = Smaller executable
+*      and libstdc++ not needed.
+* redirection of output, piping with get...
+* STAT???

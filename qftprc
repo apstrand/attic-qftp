@@ -1,0 +1,25 @@
+# Config file for qftp
+
+# Lines which start with - are treated as options, # is comments
+
+# Lowercase for set, uppercase for unset
+
+# Force overwrite
+-f
+
+# Set default username and password
+#-u peter:xxxx
+
+# Unset gzip processing with view
+#-P
+
+# Host aliases. Username, password and directory are optional
+
+# Alias	FQDN			User	Password	Directory
+
+fisk	fisk.helsingborg.se	peter	xxxx		tmp
+
+sunet	ftp.sunet.se		ftp	your@email.addr	pub/Linux
+lh	localhost		peter	xxxx		-
+funet	ftp.funet.fi		-	-		-
+ch	ftp.cs.chalmers.se	ftp	your@email.addr	-

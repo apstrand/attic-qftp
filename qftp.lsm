@@ -1,0 +1,16 @@
+Begin3
+Title:             QFTP small and fast ftp client
+Version:           0.98
+Entered-date:      07JUN98
+Description:       Small ftp client with some neat features which speeds up usage.
+                   (background downloading, shortcuts, login retry, host aliases....) 
+Keywords:          ftp, background, efficient
+Author:            pst@2.sbbs.se (Peter Strand)
+Maintained-by:     pst@2.sbbs.se (Peter Strand)
+Primary-site:      linux.fisk.helsingborg.se /pub/qftp
+                   50kb qftp-0.98.tar.gz
+                   1kb README
+Alternate-site:    sunsite.unc.edu /pub/Linux/system/network/file-transfer/
+Platforms:         linux (and most unixes), win32 (cygnus gcc)
+Copying-policy:    GPL
+End
