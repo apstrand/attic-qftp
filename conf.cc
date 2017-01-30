@@ -113,7 +113,7 @@ void Conf::setdef()
 	set('R');
 }
 
-void Conf::set(char c, char *s = NULL)
+void Conf::set(char c, char *s)
 {
 	char *p;
 	if (s)

@@ -21,7 +21,7 @@ class FtpConn {
 			return (strcmp(s1, s2) < 0);
 		}
 	};
-	vector<DirList *> cache;
+	std::vector<DirList *> cache;
 	
 	Socket *ctrl, *data;
 	char cwd[256];
@@ -50,7 +50,7 @@ class FtpConn {
 	int Connect(char *host);
 	void Close();
 	int Login(char *user, char *pass);
-	int Cmd(char *cmd, char *arg = NULL);
+	int Cmd(const char *cmd, const char *arg = NULL);
 	int Quote(char *s);
 	int List(DirList &fl, char *s = NULL);
 	int LongList(DirList &fl, char *s = NULL);

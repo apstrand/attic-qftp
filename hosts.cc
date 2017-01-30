@@ -6,6 +6,8 @@
 
 #include <unistd.h>
 #include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "hosts.h"
 #include "conf.h"
@@ -32,7 +34,7 @@ void Hosts::Add(HostEnt &he)
 
 void Hosts::Del(char *s)
 {
-	vector<HostEnt *>::iterator iter;
+	std::vector<HostEnt *>::iterator iter;
 
 	iter = hosts.begin();
 	while (iter < hosts.end()) {
@@ -144,31 +146,31 @@ void HostEnt::mkstr(char **s, char *n)
 	}
 }
 
-char *HostEnt::Alias(char *s = NULL)
+char *HostEnt::Alias(char *s)
 {
 	mkstr(&alias, s);
 	return alias;
 }
 
-char *HostEnt::Name(char *s = NULL)
+char *HostEnt::Name(char *s)
 {
 	mkstr(&name, s);
 	return name;
 }
 
-char *HostEnt::User(char *s = NULL)
+char *HostEnt::User(char *s)
 {
 	mkstr(&user, s);
 	return user;
 }
 
-char *HostEnt::Password(char *s = NULL)
+char *HostEnt::Password(char *s)
 {
 	mkstr(&password, s);
 	return password;
 }
 
-char *HostEnt::Wd(char *s = NULL)
+char *HostEnt::Wd(char *s)
 {
 	mkstr(&wd, s);
 	return wd;

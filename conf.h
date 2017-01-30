@@ -7,7 +7,7 @@
 #ifndef _CONF_H_
 #define _CONF_H_
 
-#include <vector.h>
+#include <vector>
 
 struct config {
 	char bg;	// b
@@ -30,7 +30,7 @@ struct config {
 
 
 class Conf {
-	vector<char *> arg, opt;
+	std::vector<char *> arg, opt;
 	char *argptr;
 	unsigned int argi;
 public:

@@ -33,7 +33,7 @@ class HostEnt {
 };
 
 class Hosts {
-	vector<HostEnt *> hosts;
+	std::vector<HostEnt *> hosts;
 
 	char *parseline(char *buf, char *f[]);
  public:

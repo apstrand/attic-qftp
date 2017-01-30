@@ -4,7 +4,7 @@
  *  Distributed under the GNU Pulic Licence
  */
 
-#include <algo.h>
+#include <algorithm>
 
 
 #include <string.h>
@@ -66,7 +66,7 @@ int DirList::GetAt(Entry &e, int i)
 
 int DirList::GetWidest()
 {
-	vector<Entry>::iterator wi = ents.begin();
+	std::vector<Entry>::iterator wi = ents.begin();
 	int n = 0, i;
 	while (wi != ents.end()) {
 		i = strlen((*wi).name);

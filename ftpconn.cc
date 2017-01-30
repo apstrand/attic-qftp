@@ -63,7 +63,7 @@ void FtpConn::Close()
 	}
 }
 
-int FtpConn::Cmd(char *cm, char *arg = NULL)
+int FtpConn::Cmd(const char *cm, const char *arg)
 {
 	char buf[1024];
 	
@@ -95,7 +95,7 @@ int FtpConn::GetReply()
 	return retval;
 }
 
-int FtpConn::Get(char *s, int fd, void (*cbf)(int,char *t=NULL) = NULL)
+int FtpConn::Get(char *s, int fd, void (*cbf)(int,char *t))
 {
 	Socket *ns;
 	char buf[4096];
@@ -116,8 +116,8 @@ int FtpConn::Get(char *s, int fd, void (*cbf)(int,char *t=NULL) = NULL)
 		cbf(-1, s);
 	while ((n = ns->Read(buf, 4096))) {
 		write(fd, buf, n);
-		if (cbf)
-			cbf(n);
+		if (cbf, NULL)
+			cbf(n, NULL);
 	}
 	delete ns;
 	delete data;
@@ -125,7 +125,7 @@ int FtpConn::Get(char *s, int fd, void (*cbf)(int,char *t=NULL) = NULL)
 }
 
 
-int FtpConn::Put(char *s, int fd, void (*cbf)(int,char *t=NULL) = NULL)
+int FtpConn::Put(char *s, int fd, void (*cbf)(int,char *t))
 {
 	Socket *ns;
 	char buf[4096];
@@ -147,7 +147,7 @@ int FtpConn::Put(char *s, int fd, void (*cbf)(int,char *t=NULL) = NULL)
 	while ((n = read(fd, buf, 4096)) > 0) {
 		ns->Write(buf, n);
 		if (cbf)
-			cbf(n);
+			cbf(n, NULL);
 	}
 	delete ns;
 	delete data;
@@ -160,7 +160,7 @@ int FtpConn::Quote(char *s)
 	return Cmd(s, NULL);
 }
 
-int FtpConn::Cd(char *s = NULL)
+int FtpConn::Cd(char *s)
 {
 	cwdch = 1;
 	return Cmd("CWD", s);
@@ -318,7 +318,7 @@ int FtpConn::list(DirList *dl, char *path)
 	return 0;
 }
 
-int FtpConn::LongList(DirList &dl, char *s = NULL)
+int FtpConn::LongList(DirList &dl, char *s)
 {
 	Entry e;
 	int i;
@@ -353,7 +353,7 @@ int FtpConn::LongList(DirList &dl, char *s = NULL)
 	return 0;
 }
 
-int FtpConn::longList(DirList *dl, char *s = NULL)
+int FtpConn::longList(DirList *dl, char *s)
 {
 	Socket *ns;
 	char buf[500], *p1, *p2;

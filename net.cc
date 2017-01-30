@@ -164,7 +164,7 @@ struct sockaddr_in Socket::GetRSAddr()
 	return raddr;
 }
 
-int Socket::Read(char *buf, int len = -1)
+int Socket::Read(char *buf, int len)
 {
 	return read(s, buf, len);
 }

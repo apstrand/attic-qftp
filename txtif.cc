@@ -30,10 +30,6 @@
 #include "misc.h"
 
 
-#if __GLIBC__ < 2
-typedef __sighandler_t sig_t;
-#endif
-
 #define NCPROMPT "qftp> "
 #define PROMPTF "%s:%s%%%% "
 
@@ -97,7 +93,7 @@ void TxtIF::go()
 	} while(1);
 }
 
-void TrStat(int n, char *s = NULL)
+void TrStat(int n, char *s)
 {
 	static int count;
 	if (n == -1) {
@@ -219,7 +215,7 @@ int TxtIF::Help(int n, char *a[])
 	return 0;
 }
 
-void TxtIF::Glob(char *s, DirList &dl, int glob = 0)
+void TxtIF::Glob(char *s, DirList &dl, int glob)
 {
 	Entry e;
 	int i, j;
@@ -267,7 +263,7 @@ int TxtIF::Get(int n, char *a[])
 	return 0;
 }
 
-int TxtIF::Get(Conf &conf, char *p, FtpConn *nftp = NULL)
+int TxtIF::Get(Conf &conf, char *p, FtpConn *nftp)
 {
 	FtpConn *cftp = (nftp)?nftp:ftp;
 	int fd;

@@ -7,7 +7,7 @@
 #ifndef _FLIST_H_
 #define _FLIST_H_
 
-#include <stl.h>
+#include <vector>
 
 class Entry 
 {
@@ -19,8 +19,8 @@ class Entry
 };
 
 class DirList {
-	vector<Entry> ents;
-	vector<Entry>::iterator iter;
+	std::vector<Entry> ents;
+	std::vector<Entry>::iterator iter;
 	struct { bool operator()(const Entry &a, const Entry &b) const {
 			return strcmp(a.name, b.name) < 0;
 		}
