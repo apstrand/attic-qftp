@@ -1,9 +1,11 @@
-<html>
-<body>
+## QFTP version 0.98 by Peter Strand (Copyright (C) 1998)
 
-<h2>QFTP version 0.98 by Peter Strand (pst@2.sbbs.se)</h2>
+## Build status
 
-<p>
+[![Travis CI](https://travis-ci.org/apstrand/attic-qftp.svg?branch=master)](https://travis-ci.org/apstrand/attic-qftp)
+
+## Description
+
 This program is under development, this means that the most unexpected things
 can happen when you least expect it...  I'm currently doing a total rewrite of
 the former qftp-0.92 in C++. 0.92 was a collection of quick-and-dirty hacks and
@@ -14,8 +16,8 @@ interesting ones) when I've got time and this will hopefully be a useful program
 one day :) In the meantime would I be very happy if you could send me bug
 reports and describe what happend and under which circumstances (I know that the
 program can crash, but I have to know when it crashes to be able to do something
-about it). My email-address is <a href="mailto:pst@2.sbbs.se">pst@2.sbbs.se</a>
-<p>
+about it). My email-address is pst@2.sbbs.se
+
 
 The idea behind the program is to make it fast and efficient to use, 
 no unneccessary keypresses and time saving features. 
@@ -23,17 +25,17 @@ I have many more ideas for thish which I haven't coded yet (see the TODO file
 for some), so watch out for new versions!
 If you have a neat idea please let me know and I'll try to include it.
 
-<p>
+
 I've developed this under Linux but it should work under most unixes, 
 if you have problem then let me know and I'll see what I can do about it.
 It also works (sort of) under windows (95 or NT) with the cygnus gcc port, 
 which you can get at www.cygnus.com/gnu-win32/
-<p>
+
 I have finally written a manual page!
-<br>Apart from that can you use the ? command to view available commands and
-options in the program. And you can of course read the source :)<br>
+Apart from that can you use the ? command to view available commands and
+options in the program. And you can of course read the source :)
 The source is the most reliable documentation, the man page is sometimes a bit
 out of sync... :)
 
-</body>
-</html>
+
+
